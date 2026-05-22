@@ -9,7 +9,7 @@ An internal HR tool for managing and analysing employee salary data across count
 | Backend  | Python 3.12 · FastAPI · SQLAlchemy · SQLite         |
 | Frontend | React 19 · Vite · TailwindCSS · shadcn/ui · Recharts |
 | Testing  | pytest · pytest-asyncio · httpx                     |
-| Deploy   | Render (Docker)                                     |
+| Deploy   | Railway (Docker) · Vercel / Netlify (frontend)      |
 
 ## Project layout
 
@@ -32,7 +32,7 @@ salary-tool/
 │       ├── components/   # Navbar, modals, shadcn/ui primitives
 │       └── pages/        # EmployeesPage, InsightsPage
 ├── artifacts/            # Architecture docs, ADRs, tradeoffs
-├── render.yaml
+├── railway.toml
 └── README.md
 ```
 
@@ -44,7 +44,7 @@ salary-tool/
 cd backend
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt   # includes test deps
 uvicorn app.main:app --reload
 ```
 
@@ -85,13 +85,21 @@ pytest -k insights # run only insights tests
 
 ## Deployment
 
-Configured for [Render](https://render.com) via `render.yaml`. The backend runs as a Docker service built from `backend/Dockerfile`.
+### Backend — Railway
 
-Before deploying the frontend, update `frontend/.env.production` with the Render service URL:
+Configured via `railway.toml`. Connect the repo to [Railway](https://railway.app), and it will build `backend/Dockerfile` automatically. The startup script (`backend/start.sh`) seeds the database on first boot.
+
+Set `DATABASE_URL` in Railway's environment variables if using a persistent volume. The default falls back to `sqlite:///./salary_tool.db` inside the container.
+
+### Frontend — Vercel / Netlify
+
+Connect the same repo, set the root directory to `frontend/`, and add the environment variable:
 
 ```
-VITE_API_URL=https://your-service-name.onrender.com
+VITE_API_URL=https://your-railway-service.up.railway.app
 ```
+
+Update `frontend/.env.production` with the same URL before pushing so local production builds also point at the right API.
 
 ## Live URL
 
