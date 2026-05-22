@@ -1,9 +1,3 @@
-# How Claude Code Was Used
-
-This project was built with Claude Code as the execution layer. The prompts below reflect how a senior engineer directs AI: specific constraints, explicit non-goals, and test-first sequencing. The AI's job was to write the code fast; the engineering decisions were made before the prompt was typed.
-
----
-
 ### 1. Project scaffold
 
 > Scaffold a `salary-tool/` project with `backend/` (FastAPI), `frontend/` (Vite + React), and `artifacts/` (empty). In `backend/`, create `requirements.txt` with fastapi, uvicorn, sqlalchemy, pydantic[email], pytest, httpx, pytest-asyncio. Create the `app/` package with `__init__.py` files. Add `.gitignore` for Python and Node. Do not write any application logic yet.
