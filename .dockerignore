@@ -1,0 +1,15 @@
+frontend/
+artifacts/
+README.md
+render.yaml
+railway.toml
+
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/*.db
+backend/*.db-shm
+backend/*.db-wal
+backend/.pytest_cache/
+backend/app/tests/

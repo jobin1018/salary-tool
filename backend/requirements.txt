@@ -3,7 +3,3 @@ uvicorn[standard]
 sqlalchemy
 pydantic[email]
 pydantic-settings
-pytest
-httpx
-pytest-asyncio
-faker
