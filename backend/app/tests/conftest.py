@@ -1,6 +1,7 @@
 import pytest_asyncio
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 
 from app.database import Base, get_db
 
@@ -14,7 +15,13 @@ async def client():
     from app.main import app
     from httpx import ASGITransport, AsyncClient
 
-    engine = create_engine(_TEST_DB_URL, connect_args={"check_same_thread": False})
+    # StaticPool forces all connections to share one underlying connection so
+    # the tables created by create_all() are visible to every session.
+    engine = create_engine(
+        _TEST_DB_URL,
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+    )
     Base.metadata.create_all(bind=engine)
 
     TestSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
