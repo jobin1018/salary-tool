@@ -8,9 +8,9 @@ These are conscious decisions, not oversights. Each one is acceptable for the cu
 
 There is no JWT, session cookie, or OAuth flow. Any request to the API succeeds.
 
-**Why it's acceptable now:** This is an internal tool accessed by one HR team on a private network. Adding auth before the data model and UX are stable adds friction to iteration without reducing meaningful risk.
+**Why it's acceptable now:** This is an internal HR tool at MVP stage, used by one team. Adding auth before the data model and UX are stable adds friction to iteration. The Railway deployment is publicly reachable by URL, but the URL is not advertised — security through obscurity, which is not a long-term strategy.
 
-**When it changes:** Before any external exposure — reverse proxy, public URL, or a second team onboarded. The addition would be FastAPI's `Depends` on a token validator injected into the routes that need it. Nothing in the service layer would change.
+**When it changes:** Before sharing the URL beyond the immediate team. The addition would be FastAPI's `Depends` on a token validator injected into the routes that need it. Nothing in the service layer would change.
 
 ---
 
