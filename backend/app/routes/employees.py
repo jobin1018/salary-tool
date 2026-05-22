@@ -29,8 +29,8 @@ def list_employees(
     employment_type: Optional[str] = Query(default=None),
     page: int = Query(default=1, ge=1),
     page_size: int = Query(default=20, ge=1, le=100),
-    sort_by: str = Query(default="id"),
-    sort_order: str = Query(default="asc", pattern="^(asc|desc)$"),
+    sort_by: str = Query(default="hire_date"),
+    sort_order: str = Query(default="desc", pattern="^(asc|desc)$"),
     db: Session = Depends(get_db),
 ):
     items, total, total_pages = svc.get_employees(

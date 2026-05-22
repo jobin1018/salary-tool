@@ -31,8 +31,8 @@ def get_employees(
     employment_type: Optional[str] = None,
     page: int = 1,
     page_size: int = 20,
-    sort_by: str = "id",
-    sort_order: str = "asc",
+    sort_by: str = "hire_date",
+    sort_order: str = "desc",
 ) -> Tuple[List[Employee], int, int]:
     q = db.query(Employee)
 
