@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import Base, engine
 from app.routes.employees import router as employees_router
+from app.routes.insights import router as insights_router
 
 app = FastAPI(title="Salary Tool API", version="0.1.0")
 
@@ -21,6 +22,7 @@ def create_tables():
 
 
 app.include_router(employees_router)
+app.include_router(insights_router)
 
 
 @app.get("/health", tags=["meta"])
