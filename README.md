@@ -103,4 +103,4 @@ Update `frontend/.env.production` with the same URL before pushing so local prod
 
 ## Live URL
 
-_To be updated after first deploy._
+https://salary-tool-gilt.vercel.app/employees
