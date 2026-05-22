@@ -39,6 +39,8 @@ export default function EmployeesPage() {
   const params = {
     page,
     page_size: PAGE_SIZE,
+    sort_by: 'hire_date',
+    sort_order: 'desc',
     ...(debouncedSearch && { search: debouncedSearch }),
     ...(country && country !== 'all' && { country }),
     ...(department && department !== 'all' && { department }),
